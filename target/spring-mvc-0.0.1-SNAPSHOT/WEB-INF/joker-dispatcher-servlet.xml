@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+
+<!-- Enable spring mvc features @RequestMapping, @ResponseBody, Server side
+Validation
+ -->
+
+	<mvc:annotation-driven></mvc:annotation-driven>
+
+
+	<!-- Mapping static resources allow contents from this folder
+	Useful when using folders to manage our images
+	 -->
+	<mvc:resources mapping="/images/**" location = "/images/"></mvc:resources>
+
+	<!-- Add controller pakage name -->
+	<context:component-scan
+		base-package="com.web.controller"></context:component-scan>
+
+	<!-- Hey I am going to JSP -->
+	
+	<!-- Whatever we get from the controller, we will add slash (/) 
+	to the front and .jsp to the end, so wgreet becomes /wgreet.jsp
+	-->
+	 
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView"></property>
+		<property name="prefix" value = "/"></property>
+		<property name="suffix" value = ".jsp"></property>
+	</bean>
+
+</beans>
